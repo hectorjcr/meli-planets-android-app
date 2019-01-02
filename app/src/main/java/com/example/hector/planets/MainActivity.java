@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 
 import com.example.hector.planets.Utilities.CalcsUtils;
+import com.example.hector.planets.models.GraphModels;
 import com.example.hector.planets.pojos.DayReport;
 import com.example.hector.planets.pojos.Planet;
 import com.example.hector.planets.services.ForecastApiInterface;
 import com.example.hector.planets.views.CustomView;
+import com.example.hector.planets.views.GraphView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private int t=0;
-    private Planet ferengi = new Planet("ferengi",500,1,t, Color.RED,Color.BLACK);
-    private Planet betasoide = new Planet("betasoide",2000,3,t,Color.BLUE,Color.BLACK);
-    private Planet vulcano =  new Planet("vulcano",1000,-5,t,Color.YELLOW,Color.BLACK);
+    private Planet ferengi = new Planet("ferengi",500,-1,t, Color.RED,Color.BLACK);
+    private Planet betasoide = new Planet("betasoide",2000,-3,t,Color.BLUE,Color.BLACK);
+    private Planet vulcano =  new Planet("vulcano",1000,5,t,Color.YELLOW,Color.BLACK);
     private Planet sun = new Planet("sun",0,0,t,Color.WHITE,Color.YELLOW);
     private List<Planet> planets = new ArrayList<Planet>();
+
+    GraphModels graphModels = new GraphModels(planets);
+    GraphView graphView;
+
     CustomView customView;
     Button increaseBtn,decreaseBtn;
     TextView timeText;
@@ -50,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        graphView = findViewById(R.id.graphView);
+        graphView.setGraph(graphModels.builGraph(t));
 
         increaseBtn = (Button)findViewById(R.id.increase_button);
         decreaseBtn = (Button)findViewById(R.id.decrease_button);
@@ -127,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateTime(int t){
         customView.updatePlanetsTime(this.t);
         updatePlanetsTime();
+        graphView.setGraph(graphModels.builGraph(t));
         if(!CalcsUtils.isCollinear(planets)){
             perimeterTextView.setText("Perimetro: " + Float.toString(CalcsUtils.perimeter(planets)));
         }

@@ -5,12 +5,10 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.hector.planets.MainActivity;
 import com.example.hector.planets.Utilities.CalcsUtils;
 import com.example.hector.planets.pojos.Planet;
 
@@ -93,22 +91,16 @@ public class CustomView extends View {
         canvas.drawCircle(cx,cy,planet.kmsToPointsRadius(),paint);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(planet.getPlanetColor());
-        canvas.drawCircle(cx+planet.kmsToPointsX(),cy+planet.kmsToPointsY(),planet.getPlanetSize(),paint);
+        canvas.drawCircle(cx+planet.kmsToPointsX(),cy-planet.kmsToPointsY(),planet.getPlanetSize(),paint);
         //canvas.drawCircle(cxToDp+convertToDp(planet.getX()),cyToDp+convertToDp(planet.getY()),planet.getPlanetSize(),paint);
     }
 
     private void paintLineBetweenPlanets(Canvas canvas, List<Planet> planets){
-        //TODO pintar linea entre planetas
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.parseColor("#0D4D4D"));
         canvas.drawLine(cx+planets.get(0).kmsToPointsX(),cy+planets.get(0).kmsToPointsY(),cx+planets.get(1).kmsToPointsX(),cy+planets.get(1).kmsToPointsY(),paint);
         canvas.drawLine(cx+planets.get(1).kmsToPointsX(),cy+planets.get(1).kmsToPointsY(),cx+planets.get(2).kmsToPointsX(),cy+planets.get(2).kmsToPointsY(),paint);
         canvas.drawLine(cx+planets.get(2).kmsToPointsX(),cy+planets.get(2).kmsToPointsY(),cx+planets.get(0).kmsToPointsX(),cy+planets.get(0).kmsToPointsY(),paint);
-        //paint.setStyle(Paint.Style.STROKE);
-        //paint.setColor(Color.parseColor("#AA6C39"));
-        //canvas.drawLine(cxToDp+planets.get(0).getX(),cyToDp+planets.get(0).getY(),cxToDp+planets.get(1).getX(),cyToDp+planets.get(1).getY(),paint);
-        //canvas.drawLine(cxToDp+planets.get(1).getX(),cyToDp+planets.get(1).getY(),cxToDp+planets.get(2).getX(),cyToDp+planets.get(2).getY(),paint);
-        //canvas.drawLine(cxToDp+planets.get(2).getX(),cyToDp+planets.get(2).getY(),cxToDp+planets.get(0).getX(),cyToDp+planets.get(0).getY(),paint);
     }
 
     private void paintLineSunPlanets(Canvas canvas, List<Planet>planets){
@@ -129,9 +121,6 @@ public class CustomView extends View {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.YELLOW);
         canvas.drawCircle(cx,cy,10,paint);
-        //paint.setStyle(Paint.Style.FILL);
-        //paint.setColor(Color.RED);
-        //canvas.drawCircle(cxToDp,cyToDp,10,paint);
     }
 
     private float convertToDp( float pixels){
