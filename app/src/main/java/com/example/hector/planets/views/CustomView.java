@@ -98,9 +98,9 @@ public class CustomView extends View {
     private void paintLineBetweenPlanets(Canvas canvas, List<Planet> planets){
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.parseColor("#0D4D4D"));
-        canvas.drawLine(cx+planets.get(0).kmsToPointsX(),cy+planets.get(0).kmsToPointsY(),cx+planets.get(1).kmsToPointsX(),cy+planets.get(1).kmsToPointsY(),paint);
-        canvas.drawLine(cx+planets.get(1).kmsToPointsX(),cy+planets.get(1).kmsToPointsY(),cx+planets.get(2).kmsToPointsX(),cy+planets.get(2).kmsToPointsY(),paint);
-        canvas.drawLine(cx+planets.get(2).kmsToPointsX(),cy+planets.get(2).kmsToPointsY(),cx+planets.get(0).kmsToPointsX(),cy+planets.get(0).kmsToPointsY(),paint);
+        canvas.drawLine(cx+planets.get(0).kmsToPointsX(),cy-planets.get(0).kmsToPointsY(),cx+planets.get(1).kmsToPointsX(),cy-planets.get(1).kmsToPointsY(),paint);
+        canvas.drawLine(cx+planets.get(1).kmsToPointsX(),cy-planets.get(1).kmsToPointsY(),cx+planets.get(2).kmsToPointsX(),cy-planets.get(2).kmsToPointsY(),paint);
+        canvas.drawLine(cx+planets.get(2).kmsToPointsX(),cy-planets.get(2).kmsToPointsY(),cx+planets.get(0).kmsToPointsX(),cy-planets.get(0).kmsToPointsY(),paint);
     }
 
     private void paintLineSunPlanets(Canvas canvas, List<Planet>planets){
